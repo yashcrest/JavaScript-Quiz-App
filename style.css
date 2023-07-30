@@ -1,0 +1,16 @@
+h5{
+    border-bottom: 1px solid black;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.error-msg{
+    color: red;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}

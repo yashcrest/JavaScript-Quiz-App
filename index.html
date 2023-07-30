@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script defer src="app.js" type="module"></script>
+    <title>Quiz</title>
+</head>
+<body>
+    <div class="container d-flex align-items-center justify-content-center vh-100 h-50 w-25">
+        <div class="quiz-area">
+            <div class="begin-quiz text-center">
+                <h1 class="text-center">Take a Quiz!</h1>
+                <button class="btn btn-primary btn-begin">Begin</button>
+            </div>
+            <div class="question-area hidden">
+                <h5 class=" text-success mt-3">Question <span class="question-number"></span> of <span class="total-questions"></span></h5>
+                <p class="question lead"></p>
+                <div class="text-center">
+                    <div class="form-check">
+                        <!-- if you do not use "name" attribute multiple radio button will be selected -->
+                        <!-- for the radio buttons to be vertically stack they need to be in their own div -->
+                        <!-- "id" in input and "for" in label are connected, which allows the user to click directly in the text rather than just in the radio button-->
+                        <input type="radio" name="option" id="opt-1" class="form-check-input btn-check" value="option-A">
+                        <label  class="opt-1 form-check-label btn btn-outline-secondary w-100" for="opt-1"></label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="option" id="opt-2"  class="form-check-input btn-check" value="option-B">
+                        <label for="opt-2"  class="opt-2 form-check-label btn btn-outline-secondary w-100"></label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="option" id="opt-3" class="form-check-input btn-check" value="option-C">
+                        <label for="opt-3"  class="opt-3 form-check-label btn btn-outline-secondary w-100"></label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="option" id="opt-4" class="form-check-input btn-check" value="option-D">
+                        <label for="opt-4"  class="opt-4 form-check-label btn btn-outline-secondary w-100"></label>
+                    </div>
+                    <!-- error msg -->
+                    <div class="error-msg hidden">Please select an option</div>
+                    <div class="py-4">
+                        <button type="button" class="btn btn-success btn-next ">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="answer-area text-center hidden">
+            <h1>End of Quiz!</h1>
+            <p class="lead" id="score"></p>
+            <p id="answer-list"></p>
+        </div>
+    </div>
+</body>
+</html>
