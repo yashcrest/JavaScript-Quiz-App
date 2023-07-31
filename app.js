@@ -77,21 +77,25 @@ async function startquiz(){
 function renderHTML(){
     //remove correct-answer class from previous selected option
     opts_input.forEach(opt => opt.nextElementSibling.classList.remove('correct-answer'));
+    
     //questions options
-    let options = [quizData.results[currentQuestionIndex].incorrect_answers[0],
-    quizData.results[currentQuestionIndex].incorrect_answers[1], 
-    quizData.results[currentQuestionIndex].incorrect_answers[2],
-    quizData.results[currentQuestionIndex].correct_answer,
+    let options = [decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[0]),
+    decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[1]), 
+    decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[2]),
+    decodeHTML(quizData.results[currentQuestionIndex].correct_answer),
 ];
     // console.log('Options: ' + options);
     shuffleOptions(options);
 
     // console.log('Randomized Options: '+ randomOptions)
 
+    //decoding HTML encoding
+    const decodeQuestion = decodeHTML(quizData.results[currentQuestionIndex].question);
+    question.textContent = decodeQuestion;
+
     //assigning options to HTML element
     questionNumber.textContent = currentQuestionNumber;
     totalQuestions.textContent = quizData.results.length;
-    question.textContent = quizData.results[currentQuestionIndex].question;
     option1.nextElementSibling.textContent = randomOptions[0];
     option2.nextElementSibling.textContent = randomOptions[1];
     option3.nextElementSibling.textContent = randomOptions[2];
@@ -177,6 +181,13 @@ function previousQuestion(){
 
 function clearSelectedOption() {
     opts_input.forEach(opt => opt.checked = false);
+}
+
+//for decomding HTML-encoding 
+function decodeHTML(html){
+    let txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
 }
 
 nextBtn.addEventListener('click', nextQuestion);
