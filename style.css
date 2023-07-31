@@ -15,8 +15,8 @@ body {
 }
 
 .correct-answer {
-    background: rgb(36, 170, 36);
-    color: black;
+    background-color: #198754 !important;
+    color: #f7f7f7 !important;
 }
 
 .question-heading {

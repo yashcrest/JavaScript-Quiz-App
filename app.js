@@ -75,6 +75,8 @@ async function startquiz(){
 }
 
 function renderHTML(){
+    //remove correct-answer class from previous selected option
+    opts_input.forEach(opt => opt.nextElementSibling.classList.remove('correct-answer'));
     //questions options
     let options = [quizData.results[currentQuestionIndex].incorrect_answers[0],
     quizData.results[currentQuestionIndex].incorrect_answers[1], 
@@ -135,12 +137,10 @@ function nextQuestion(){
             display_answer.classList.add('hidden');
             renderHTML()
             
-        }, 1000);
+        },1000);
     }
+
     setTimeout(() => {
-        if(selectedOption.nextElementSibling.textContent === correctAnswer){
-            selectedOption.nextElementSibling.classList.remove('correct-answer')
-        }
         currentQuestionNumber ++;
         currentQuestionIndex ++;
         randomOptions = [];
@@ -154,8 +154,9 @@ function nextQuestion(){
             console.log(`Your total score is: ${userScore}`)
             totalScore.textContent = `Score: ${userScore} out of ${quizData.results.length}`
         }
-    }, selectedOption.nextElementSibling.textContent === correctAnswer ? 800 : 1000);
+    }, 1000);
 }
+
 
 function previousQuestion(){
     if(currentQuestionIndex <= 0){
