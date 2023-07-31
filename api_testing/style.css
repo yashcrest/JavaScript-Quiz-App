@@ -13,3 +13,17 @@ body {
     color: red;
     font-style: bold;
 }
+
+.correct-answer {
+    background: rgb(36, 170, 36);
+    color: black;
+}
+
+.question-heading {
+    border-bottom: 1px black solid;
+}
+
+.display-answer {
+    color: rgb(234, 96, 32);
+    font-weight: bold;
+}

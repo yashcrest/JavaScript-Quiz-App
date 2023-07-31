@@ -12,13 +12,16 @@
 <body>
     <div class="begin-quiz text-center">
         <h1>Take a Quiz!</h1>
+        <p class="lead">Choose a Category:</p>
+        <select class="form-select my-3" id="select-category"></select>
         <button class="btn btn-primary begin-btn">Begin</button>
     </div>
     <div class="m-4 quiz-area hidden">
         <div class="question-area">
+            <h5 class=" text-success mt-3 question-heading text-center">Question <span class="question-number"></span> of <span class="total-questions"></span></h5>
             <p class="question lead"></p>
         </div>
-        <div class="option-area ms-left">
+        <div class="option-area text-center">
             <div class="form-check">
                 <input class="form-check-input btn-check" type="radio" id="option-1" name="options">
                 <label class="form-check-label btn btn-outline-secondary w-50" for="option-1"></label>
@@ -36,16 +39,16 @@
                 <label class="form-check-label btn btn-outline-secondary w-50" for="option-4"></label>
             </div>
             <div class="error-msg hidden">Please select an option</div>
-            <div class="buttons">
-                <button type="submit" class="btn btn-primary my-4 check-answer">Check Answer</button>
+            <div class="display-answer hidden"></div>
+            <div class="buttons my-4">
                 <button class="btn btn-primary previous-btn">Previous</button>
                 <button class="btn btn-primary next-btn">Next</button>
             </div>
         </div>
     </div>
     <div class="end-area hidden text-center">
-        <h1>End of Quiz!</h1>
-        <p class="total-score"></p>
+        <h1 class="total-score"></h1>
+        <p class="total-score">End of Quiz!</p>
         <button class="restart-btn btn btn-primary">Restart</button>
     </div>
 </body>

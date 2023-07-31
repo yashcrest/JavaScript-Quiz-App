@@ -4,11 +4,14 @@ const option2 = document.querySelector('#option-2');
 const option3 = document.querySelector('#option-3');
 const option4 = document.querySelector('#option-4');
 const beginBtn = document.querySelector('.begin-btn');
+const selectCategory = document.querySelector('#select-category');
+const questionNumber = document.querySelector('.question-number');
+const totalQuestions = document.querySelector('.total-questions');
 const nextBtn = document.querySelector('.next-btn');
 const previousBtn = document.querySelector('.previous-btn');
-const checkBtn = document.querySelector('.check-answer');
 const restartBtn = document.querySelector('.restart-btn')
 const error_msg = document.querySelector('.error-msg');
+const display_answer = document.querySelector('.display-answer');
 const beginQuiz = document.querySelector('.begin-quiz');
 const quizArea = document.querySelector('.quiz-area');
 const endArea = document.querySelector('.end-area');
@@ -19,9 +22,40 @@ let currentQuestionIndex = 0;
 let opts_input = Array.from(document.getElementsByName('options'));
 let quizData = null;
 let userScore = 0;
+let currentQuestionNumber = 1
+let category_id = 18; //default category --> Computer Science
+let quizCategory = null;
+
+async function getCategory(){
+    let url = 'https://opentdb.com/api_category.php'
+    try {
+        let category = await fetch(url);
+        return await category.json();
+    } catch(error){
+        console.log(error);
+    }
+}
+
+async function displayCategory(){
+    quizCategory = await getCategory();
+    console.log(quizCategory);
+    let triviaCategories = quizCategory.trivia_categories;
+    //displaying cateogry
+    triviaCategories.forEach(category => {
+        let option = document.createElement('option')
+        option.setAttribute('value', `${category.id}`);
+        option.textContent = category.name;
+        selectCategory.appendChild(option);
+    })
+}
+
+function updateCategoryID() {
+    category_id = selectCategory.value;
+}
+
 
 async function getQuizData(){
-    let url = 'https://opentdb.com/api.php?amount=10&category=18&type=multiple';
+    let url = `https://opentdb.com/api.php?amount=10&category=${category_id}&type=multiple`;
     try{
         let data = await fetch(url);
         return await data.json();
@@ -31,6 +65,7 @@ async function getQuizData(){
 }
 
 async function startquiz(){
+    updateCategoryID();
     beginQuiz.classList.add('hidden');
     quizArea.classList.remove('hidden');
     endArea.classList.add('hidden')
@@ -46,12 +81,14 @@ function renderHTML(){
     quizData.results[currentQuestionIndex].incorrect_answers[2],
     quizData.results[currentQuestionIndex].correct_answer,
 ];
-    console.log('Options: ' + options);
+    // console.log('Options: ' + options);
     shuffleOptions(options);
 
-    console.log('Randomized Options: '+ randomOptions)
+    // console.log('Randomized Options: '+ randomOptions)
 
     //assigning options to HTML element
+    questionNumber.textContent = currentQuestionNumber;
+    totalQuestions.textContent = quizData.results.length;
     question.textContent = quizData.results[currentQuestionIndex].question;
     option1.nextElementSibling.textContent = randomOptions[0];
     option2.nextElementSibling.textContent = randomOptions[1];
@@ -68,60 +105,60 @@ function shuffleOptions(options){
     }
 }
 
-async function checkAnswer(){
-    //check if you can pass results directly when calling getQuizData
-    let selectedOption = opts_input.find(opt => opt.checked);
-    //condtion if no option is selected
-    if(!selectedOption){
-        console.log('no option selected');
-        error_msg.classList.remove('hidden');
-        setTimeout(() => {
-            error_msg.classList.add('hidden');
-        }, 1000);
-        return;
-    }
-    let correctAnswer = quizData.results[currentQuestionIndex].correct_answer;
-    console.log('Correct answer: ' + correctAnswer);
-    if(selectedOption.nextElementSibling.textContent === correctAnswer){
-        console.log('correct answer');
-        userScore ++;
-        console.log(`Current Score: ${userScore}`)
-    } else {
-        console.log('incorrect answer')
-    }
-}
-
 function nextQuestion(){
     let selectedOption = opts_input.find(opt => opt.checked);
-    //condtion if no option is selected
-    if(!selectedOption){
+    let correctAnswer = quizData.results[currentQuestionIndex].correct_answer;
+
+     //condtion if no option is selected
+     if(!selectedOption){
         console.log('no option selected');
         error_msg.textContent = 'No skipping questions!'
         error_msg.classList.remove('hidden');
         setTimeout(() => {
-            error_msg.textContent = 'Please select an option.'
             error_msg.classList.add('hidden');
         }, 1000);
         return;
     }
-    currentQuestionIndex ++;
-    randomOptions = [];
-    clearSelectedOption();
 
-    
-    if(currentQuestionIndex < quizData.results.length){
-        renderHTML();
-    } else { //handle end of quiz
-        quizArea.classList.add('hidden')
-        endArea.classList.remove('hidden');
-        console.log('end of quiz!')
-        console.log(`Your total score is: ${userScore}`)
-        totalScore.textContent = `You total score is ${userScore}/10`
+    //check answer
+    if(selectedOption.nextElementSibling.textContent === correctAnswer){
+        userScore ++;
+        console.log(`Score : ${userScore}`);
+        selectedOption.nextElementSibling.classList.add('correct-answer')
+    } else{
+        console.log('incorrect');
+        console.log('Correct answer: ' + correctAnswer);
+        console.log(`Score: ${userScore}`);
+        display_answer.textContent = correctAnswer;
+        display_answer.classList.remove('hidden');
+        setTimeout(() => {
+            display_answer.classList.add('hidden');
+            renderHTML()
+            
+        }, 1000);
     }
+    setTimeout(() => {
+        if(selectedOption.nextElementSibling.textContent === correctAnswer){
+            selectedOption.nextElementSibling.classList.remove('correct-answer')
+        }
+        currentQuestionNumber ++;
+        currentQuestionIndex ++;
+        randomOptions = [];
+        clearSelectedOption();
+        if(currentQuestionIndex < quizData.results.length){
+            renderHTML();
+        } else{ // to handle end of quiz
+            quizArea.classList.add('hidden')
+            endArea.classList.remove('hidden');
+            console.log('end of quiz!')
+            console.log(`Your total score is: ${userScore}`)
+            totalScore.textContent = `Score: ${userScore} out of ${quizData.results.length}`
+        }
+    }, selectedOption.nextElementSibling.textContent === correctAnswer ? 800 : 1000);
 }
 
 function previousQuestion(){
-    if(currentQuestionIndex < 0){
+    if(currentQuestionIndex <= 0){
         error_msg.textContent = 'This is the first question'
         error_msg.classList.remove('hidden');
         setTimeout(() => {
@@ -130,6 +167,7 @@ function previousQuestion(){
         }, 1000);
         return;
     }
+    currentQuestionNumber --;
     currentQuestionIndex --;
     randomOptions =[];
     clearSelectedOption();
@@ -142,9 +180,7 @@ function clearSelectedOption() {
 
 nextBtn.addEventListener('click', nextQuestion);
 previousBtn.addEventListener('click', previousQuestion);
-checkBtn.addEventListener('click', checkAnswer);
 beginBtn.addEventListener('click', startquiz);
-restartBtn.addEventListener('click', startquiz);
+restartBtn.addEventListener('click', startquiz); // the logic is still not right
+displayCategory();
 
-//things left : handle end of quiz(display end msg, score)✅, display question number, show correct option when incorrect option is selected.
-//restart button logic is not right.
