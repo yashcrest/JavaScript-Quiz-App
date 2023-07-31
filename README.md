@@ -16,5 +16,6 @@ User cannot click next without answering the current question.
 
 
 ## Indicating incorrect answer
-When the user selected option is incorrect, the app will display the correct option for some time before moving into next question. 
+When the user selected option is incorrect, the app will display the correct option for some time before moving into next question.
+
 <img width="674" alt="image" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/f1ce5dc8-8676-49f9-85a0-d55e2690111f">
