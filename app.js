@@ -183,6 +183,12 @@ function clearSelectedOption() {
     opts_input.forEach(opt => opt.checked = false);
 }
 
+function resetQuiz(){
+    currentQuestionIndex = 0;
+    currentQuestionNumber = 1;
+    startquiz();
+}
+
 //for decomding HTML-encoding 
 function decodeHTML(html){
     let txt = document.createElement('textarea');
@@ -193,6 +199,6 @@ function decodeHTML(html){
 nextBtn.addEventListener('click', nextQuestion);
 previousBtn.addEventListener('click', previousQuestion);
 beginBtn.addEventListener('click', startquiz);
-restartBtn.addEventListener('click', startquiz); // the logic is still not right
+restartBtn.addEventListener('click', resetQuiz); // the logic is still not right
 displayCategory();
 
