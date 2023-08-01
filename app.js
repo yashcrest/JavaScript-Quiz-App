@@ -65,6 +65,7 @@ async function getQuizData(){
 }
 
 async function startquiz(){
+    clearHTML();
     updateCategoryID();
     beginQuiz.classList.add('hidden');
     quizArea.classList.remove('hidden');
@@ -78,20 +79,17 @@ function renderHTML(){
     //remove correct-answer class from previous selected option
     opts_input.forEach(opt => opt.nextElementSibling.classList.remove('correct-answer'));
     
+    //decoding HTML encoding
+    const decodeQuestion = decodeHTML(quizData.results[currentQuestionIndex].question);
+    question.textContent = decodeQuestion;
+
     //questions options
     let options = [decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[0]),
     decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[1]), 
     decodeHTML(quizData.results[currentQuestionIndex].incorrect_answers[2]),
     decodeHTML(quizData.results[currentQuestionIndex].correct_answer),
 ];
-    // console.log('Options: ' + options);
     shuffleOptions(options);
-
-    // console.log('Randomized Options: '+ randomOptions)
-
-    //decoding HTML encoding
-    const decodeQuestion = decodeHTML(quizData.results[currentQuestionIndex].question);
-    question.textContent = decodeQuestion;
 
     //assigning options to HTML element
     questionNumber.textContent = currentQuestionNumber;
@@ -183,17 +181,30 @@ function clearSelectedOption() {
     opts_input.forEach(opt => opt.checked = false);
 }
 
+//for decomding HTML-encoding 
+function decodeHTML(html){
+    let txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+}
+
 function resetQuiz(){
     currentQuestionIndex = 0;
     currentQuestionNumber = 1;
     startquiz();
 }
 
-//for decomding HTML-encoding 
-function decodeHTML(html){
-    let txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    return txt.value;
+//rerendering html after restart
+function clearHTML(){
+    question.textContent = '';
+    option1.nextElementSibling.textContent = '';
+    option2.nextElementSibling.textContent = '';
+    option3.nextElementSibling.textContent = '';
+    option4.nextElementSibling.textContent = '';
+    randomOptions = [];
+    error_msg.classList.add('hidden');
+    display_answer.classList.add('hidden');
+    userScore = 0;
 }
 
 nextBtn.addEventListener('click', nextQuestion);
