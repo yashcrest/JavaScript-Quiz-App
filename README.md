@@ -26,7 +26,7 @@ This is a simple JavaScript Quiz App that lets users take a quiz on different ca
 ## How to Use
 
 1. **Clone the Repository:** 
-```git clone https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API.git```
+```git clone https://github.com/yashcrest/quiz.github.io.git```
 
 2. **Open `index.html` File:** Navigate to the project folder and open `index.html` in your browser.
 
