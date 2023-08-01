@@ -139,7 +139,7 @@ function nextQuestion(){
             display_answer.classList.add('hidden');
             renderHTML()
             
-        },1000);
+        },3000);
     }
 
     setTimeout(() => {
@@ -156,7 +156,7 @@ function nextQuestion(){
             console.log(`Your total score is: ${userScore}`)
             totalScore.textContent = `Score: ${userScore} out of ${quizData.results.length}`
         }
-    }, 1000);
+    }, 3000);
 }
 
 
