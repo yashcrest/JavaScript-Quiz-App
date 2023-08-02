@@ -71,6 +71,7 @@ async function startquiz(){
     quizArea.classList.remove('hidden');
     endArea.classList.add('hidden')
     quizData = await getQuizData();
+    console.log(quizData);
     renderHTML();
 }
 
@@ -110,7 +111,7 @@ function shuffleOptions(options){
 
 function nextQuestion(){
     let selectedOption = opts_input.find(opt => opt.checked);
-    let correctAnswer = quizData.results[currentQuestionIndex].correct_answer;
+    let correctAnswer = decodeHTML(quizData.results[currentQuestionIndex].correct_answer);
 
      //condtion if no option is selected
      if(!selectedOption){
