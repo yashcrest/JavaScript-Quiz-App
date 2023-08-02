@@ -58,6 +58,7 @@ async function getQuizData(){
     let url = `https://opentdb.com/api.php?amount=10&category=${category_id}&type=multiple`;
     try{
         let data = await fetch(url);
+        if(!data.ok) throw new Error('Failed to fetch data');
         return await data.json();
     } catch (error) {
         console.log(error);
