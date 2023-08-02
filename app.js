@@ -38,7 +38,6 @@ async function getCategory(){
 
 async function displayCategory(){
     quizCategory = await getCategory();
-    console.log(quizCategory);
     let triviaCategories = quizCategory.trivia_categories;
     //displaying cateogry
     triviaCategories.forEach(category => {
@@ -72,7 +71,6 @@ async function startquiz(){
     quizArea.classList.remove('hidden');
     endArea.classList.add('hidden')
     quizData = await getQuizData();
-    console.log(quizData);//getting the questions/answers array from API
     renderHTML();
 }
 
@@ -116,7 +114,6 @@ function nextQuestion(){
 
      //condtion if no option is selected
      if(!selectedOption){
-        console.log('no option selected');
         error_msg.textContent = 'No skipping questions!'
         error_msg.classList.remove('hidden');
         setTimeout(() => {
@@ -128,12 +125,8 @@ function nextQuestion(){
     //check answer
     if(selectedOption.nextElementSibling.textContent === correctAnswer){
         userScore ++;
-        console.log(`Score : ${userScore}`);
         selectedOption.nextElementSibling.classList.add('correct-answer')
     } else{
-        console.log('incorrect');
-        console.log('Correct answer: ' + correctAnswer);
-        console.log(`Score: ${userScore}`);
         display_answer.textContent = correctAnswer;
         display_answer.classList.remove('hidden');
         setTimeout(() => {
@@ -211,6 +204,6 @@ function clearHTML(){
 nextBtn.addEventListener('click', nextQuestion);
 previousBtn.addEventListener('click', previousQuestion);
 beginBtn.addEventListener('click', startquiz);
-restartBtn.addEventListener('click', resetQuiz); // the logic is still not right
+restartBtn.addEventListener('click', resetQuiz);
 displayCategory();
 
