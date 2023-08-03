@@ -9,7 +9,10 @@ This is a simple JavaScript Quiz App that lets users take a quiz on different ca
 - **Prevent Skipping:** Users cannot proceed to the next question without selecting an answer.
 - **End of Quiz Summary:** Displays the user's total score at the end of the quiz.
 
-## Screenshots
+## Working Demo of the app
+
+![Quiz](https://github.com/yashcrest/quiz.github.io/assets/79971012/fb43556e-3ce5-4993-9f08-405f38a9ab48)
+
 
 ### Choosing a category
 <img width="998" alt="Screenshot" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/9eefd93b-ca40-47ff-8eb4-8e5399d62082">
