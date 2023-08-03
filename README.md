@@ -13,19 +13,6 @@ This is a simple JavaScript Quiz App that lets users take a quiz on different ca
 
 ![Quiz](https://github.com/yashcrest/quiz.github.io/assets/79971012/fb43556e-3ce5-4993-9f08-405f38a9ab48)
 
-
-### Choosing a category
-<img width="998" alt="Screenshot" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/9eefd93b-ca40-47ff-8eb4-8e5399d62082">
-
-### Displaying of questions
-<img width="742" alt="image" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/27fd5247-0ec1-46d8-bb27-68873f122f8d">
-
-### Preventing users from skipping questions
-<img width="775" alt="Screenshot" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/b72554f0-5089-48be-be0d-a7b5e7bc0f4c">
-
-### Indicating incorrect answer
-<img width="674" alt="image" src="https://github.com/yashcrest/JS-Quiz-with-OpenTrivia-API/assets/79971012/f1ce5dc8-8676-49f9-85a0-d55e2690111f">
-
 ## How to Use
 
 1. **Clone the Repository:** 
