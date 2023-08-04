@@ -17,6 +17,8 @@ const quizArea = document.querySelector('.quiz-area');
 const endArea = document.querySelector('.end-area');
 const totalScore = document.querySelector('.total-score');
 
+
+//global variable
 let randomOptions =[]
 let currentQuestionIndex = 0;
 let opts_input = Array.from(document.getElementsByName('options'));
