@@ -1,6 +1,8 @@
 # JavaScript Quiz App using OpenTrivia API
 
 This is a simple JavaScript Quiz App that lets users take a quiz on different categories by fetching questions from the [OpenTrivia API](https://opentdb.com/api_config.php).
+
+# Live Demo
 [Live Demo](https://quizapp.yashshrestha.net)
 
 ## Features
